@@ -1,30 +1,30 @@
 {
-    "keep": {
-        "days": true,
-        "amount": 14
+  "keep": {
+    "days": true,
+    "amount": 14
+  },
+  "auditLog": "J:\\Appolo\\assignment\\cleano\\logs\\winston\\successes\\.a8b7a0628749550ff8589cc03ce68c6ddef52d5c-audit.json",
+  "files": [
+    {
+      "date": 1697041372584,
+      "name": "J:\\Appolo\\assignment\\cleano\\logs\\winston\\successes\\phu-2023-11-10-22-success.log",
+      "hash": "2e7c2b3fa2a41631a616f880cb9fe394b13193c8a2452bd273d7952d0b9de011"
     },
-    "auditLog": "J:\\Appolo\\assignment\\cleano\\logs\\winston\\successes\\.a8b7a0628749550ff8589cc03ce68c6ddef52d5c-audit.json",
-    "files": [
-        {
-            "date": 1697041372584,
-            "name": "J:\\Appolo\\assignment\\cleano\\logs\\winston\\successes\\phu-2023-11-10-22-success.log",
-            "hash": "2e7c2b3fa2a41631a616f880cb9fe394b13193c8a2452bd273d7952d0b9de011"
-        },
-        {
-            "date": 1697047541038,
-            "name": "J:\\Appolo\\assignment\\cleano\\logs\\winston\\successes\\phu-2023-12-10-00-success.log",
-            "hash": "30e4e6164d448eca08f0f8ecfd71610cd66c52f8a260c32f05d29ae0ad5eb9e5"
-        },
-        {
-            "date": 1697051350786,
-            "name": "J:\\Appolo\\assignment\\cleano\\logs\\winston\\successes\\phu-2023-12-10-01-success.log",
-            "hash": "88c69fee7ee0c95b11b69d224744e9ad99c49ebc910e7093aa874f93492aac0a"
-        },
-        {
-            "date": 1697055076218,
-            "name": "J:\\Appolo\\assignment\\cleano\\logs\\winston\\successes\\phu-2023-12-10-02-success.log",
-            "hash": "243d135d1068f1740350a8a72ba930ef086a186463ccd967be8f933e5aa225c6"
-        }
-    ],
-    "hashType": "sha256"
+    {
+      "date": 1697047541038,
+      "name": "J:\\Appolo\\assignment\\cleano\\logs\\winston\\successes\\phu-2023-12-10-00-success.log",
+      "hash": "30e4e6164d448eca08f0f8ecfd71610cd66c52f8a260c32f05d29ae0ad5eb9e5"
+    },
+    {
+      "date": 1697051350786,
+      "name": "J:\\Appolo\\assignment\\cleano\\logs\\winston\\successes\\phu-2023-12-10-01-success.log",
+      "hash": "88c69fee7ee0c95b11b69d224744e9ad99c49ebc910e7093aa874f93492aac0a"
+    },
+    {
+      "date": 1697055076218,
+      "name": "J:\\Appolo\\assignment\\cleano\\logs\\winston\\successes\\phu-2023-12-10-02-success.log",
+      "hash": "243d135d1068f1740350a8a72ba930ef086a186463ccd967be8f933e5aa225c6"
+    }
+  ],
+  "hashType": "sha256"
 }

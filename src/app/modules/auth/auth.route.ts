@@ -17,4 +17,10 @@ router.post(
   AuthController.createAdmin
 );
 
+router.post(
+  '/login',
+  validateRequest(AuthValidation.login),
+  AuthController.login
+);
+
 export const AuthRoutes = router;

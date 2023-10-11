@@ -15,6 +15,18 @@ const signup = z.object({
     .strict(),
 });
 
+const login = z.object({
+  body: z
+    .object({
+      email: z
+        .string({ required_error: 'Please enter a valid email address' })
+        .email('Please enter a valid email address'),
+      password: z.string({ required_error: 'Password is required' }),
+    })
+    .strict(),
+});
+
 export const AuthValidation = {
   signup,
+  login,
 };
