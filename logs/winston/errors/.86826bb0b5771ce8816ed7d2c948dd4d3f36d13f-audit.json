@@ -1,20 +1,20 @@
 {
-    "keep": {
-        "days": true,
-        "amount": 14
+  "keep": {
+    "days": true,
+    "amount": 14
+  },
+  "auditLog": "J:\\Appolo\\assignment\\cleano\\logs\\winston\\errors\\.86826bb0b5771ce8816ed7d2c948dd4d3f36d13f-audit.json",
+  "files": [
+    {
+      "date": 1697041372587,
+      "name": "J:\\Appolo\\assignment\\cleano\\logs\\winston\\errors\\phu-2023-11-10-22-error.log",
+      "hash": "5723b8eaf3fe183cdc47241a3a94628b7548b84199a5a71f4a2ab3968b64538d"
     },
-    "auditLog": "J:\\Appolo\\assignment\\cleano\\logs\\winston\\errors\\.86826bb0b5771ce8816ed7d2c948dd4d3f36d13f-audit.json",
-    "files": [
-        {
-            "date": 1697041372587,
-            "name": "J:\\Appolo\\assignment\\cleano\\logs\\winston\\errors\\phu-2023-11-10-22-error.log",
-            "hash": "5723b8eaf3fe183cdc47241a3a94628b7548b84199a5a71f4a2ab3968b64538d"
-        },
-        {
-            "date": 1697047541041,
-            "name": "J:\\Appolo\\assignment\\cleano\\logs\\winston\\errors\\phu-2023-12-10-00-error.log",
-            "hash": "8a92ece430d99b2a0bca70bcf6ab10720f68459d252adf1973cb22a5568f5edc"
-        }
-    ],
-    "hashType": "sha256"
+    {
+      "date": 1697047541041,
+      "name": "J:\\Appolo\\assignment\\cleano\\logs\\winston\\errors\\phu-2023-12-10-00-error.log",
+      "hash": "8a92ece430d99b2a0bca70bcf6ab10720f68459d252adf1973cb22a5568f5edc"
+    }
+  ],
+  "hashType": "sha256"
 }

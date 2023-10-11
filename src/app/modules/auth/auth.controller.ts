@@ -15,6 +15,19 @@ const signup = catchAsync(async (req: Request, res: Response) => {
   });
 });
 
+const createAdmin = catchAsync(async (req: Request, res: Response) => {
+  req.body.role = 'admin';
+  const result = await AuthService.signup(req.body);
+
+  sendResponse<User>(res, {
+    statusCode: 201,
+    success: true,
+    message: 'Admin created successfully',
+    data: result,
+  });
+});
+
 export const AuthController = {
   signup,
+  createAdmin,
 };
