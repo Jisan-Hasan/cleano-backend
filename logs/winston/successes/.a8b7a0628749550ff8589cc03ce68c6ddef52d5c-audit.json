@@ -1,0 +1,15 @@
+{
+    "keep": {
+        "days": true,
+        "amount": 14
+    },
+    "auditLog": "J:\\Appolo\\assignment\\cleano\\logs\\winston\\successes\\.a8b7a0628749550ff8589cc03ce68c6ddef52d5c-audit.json",
+    "files": [
+        {
+            "date": 1697041372584,
+            "name": "J:\\Appolo\\assignment\\cleano\\logs\\winston\\successes\\phu-2023-11-10-22-success.log",
+            "hash": "2e7c2b3fa2a41631a616f880cb9fe394b13193c8a2452bd273d7952d0b9de011"
+        }
+    ],
+    "hashType": "sha256"
+}
