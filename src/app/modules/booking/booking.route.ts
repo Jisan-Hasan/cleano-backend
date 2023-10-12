@@ -20,4 +20,6 @@ router.patch(
   BookingController.update
 );
 
+router.delete('/:id', BookingController.deleteBooking);
+
 export const BookingRoutes = router;

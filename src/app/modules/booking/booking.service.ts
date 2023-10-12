@@ -123,9 +123,18 @@ const update = async (
   return result;
 };
 
+const deleteBooking = async (id: string): Promise<Booking> => {
+  const result = await prisma.booking.delete({
+    where: { id },
+  });
+
+  return result;
+};
+
 export const BookingService = {
   create,
   getAll,
   getSingle,
   update,
+  deleteBooking,
 };
