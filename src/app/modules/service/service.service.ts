@@ -1,5 +1,7 @@
 /* eslint-disable @typescript-eslint/no-explicit-any */
 import { Prisma, Service } from '@prisma/client';
+import httpStatus from 'http-status';
+import ApiError from '../../../errors/ApiError';
 import { paginationHelpers } from '../../../helpers/paginationHelper';
 import { IGenericResponse } from '../../../interfaces/common';
 import { IPaginationOptions } from '../../../interfaces/pagination';
@@ -91,7 +93,18 @@ const getAll = async (
   };
 };
 
+const getSingle = async (id: string): Promise<Service | null> => {
+  const result = await prisma.service.findUnique({ where: { id } });
+
+  if (!result) {
+    throw new ApiError(httpStatus.NOT_FOUND, 'Service not found');
+  }
+
+  return result;
+};
+
 export const ServiceService = {
   create,
   getAll,
+  getSingle,
 };
