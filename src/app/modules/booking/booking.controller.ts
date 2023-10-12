@@ -45,4 +45,15 @@ const getSingle = catchAsync(async (req: Request, res: Response) => {
   });
 });
 
-export const BookingController = { create, getAll, getSingle };
+const update = catchAsync(async (req: Request, res: Response) => {
+  const result = await BookingService.update(req.params.id, req.body);
+
+  sendResponse<Booking>(res, {
+    statusCode: httpStatus.OK,
+    success: true,
+    message: 'Booking updated successfully',
+    data: result,
+  });
+});
+
+export const BookingController = { create, getAll, getSingle, update };

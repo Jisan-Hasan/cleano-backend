@@ -107,8 +107,25 @@ const getSingle = async (id: string): Promise<Booking | null> => {
   return result;
 };
 
+const update = async (
+  id: string,
+  payload: Partial<Booking>
+): Promise<Booking> => {
+  const result = await prisma.booking.update({
+    where: { id },
+    data: payload,
+    include: {
+      user: true,
+      service: true,
+    },
+  });
+
+  return result;
+};
+
 export const BookingService = {
   create,
   getAll,
   getSingle,
+  update,
 };

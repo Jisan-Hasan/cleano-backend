@@ -19,6 +19,9 @@ const update = z.object({
   body: z
     .object({
       date: z.date().optional(),
+      status: z
+        .enum(['pending', 'confirmed', 'completed', 'cancelled'])
+        .optional(),
       contractNo: z.string().optional(),
       houseNo: z.string().optional(),
       street: z.string().optional(),
