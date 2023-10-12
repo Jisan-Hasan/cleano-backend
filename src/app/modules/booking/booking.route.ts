@@ -12,5 +12,6 @@ router.post(
 );
 
 router.get('/', BookingController.getAll);
+router.get('/:id', BookingController.getSingle);
 
 export const BookingRoutes = router;

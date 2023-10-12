@@ -1,5 +1,7 @@
 /* eslint-disable @typescript-eslint/no-explicit-any */
 import { Booking, Prisma } from '@prisma/client';
+import httpStatus from 'http-status';
+import ApiError from '../../../errors/ApiError';
 import { paginationHelpers } from '../../../helpers/paginationHelper';
 import { IGenericResponse } from '../../../interfaces/common';
 import { IPaginationOptions } from '../../../interfaces/pagination';
@@ -95,7 +97,18 @@ const getAll = async (
   };
 };
 
+const getSingle = async (id: string): Promise<Booking | null> => {
+  const result = await prisma.booking.findUnique({ where: { id } });
+
+  if (!result) {
+    throw new ApiError(httpStatus.NOT_FOUND, 'Booking not found');
+  }
+
+  return result;
+};
+
 export const BookingService = {
   create,
   getAll,
+  getSingle,
 };
