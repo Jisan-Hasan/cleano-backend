@@ -20,4 +20,6 @@ router.patch(
   ServiceController.update
 );
 
+router.delete('/:id', ServiceController.deleteService);
+
 export const ServiceRoutes = router;
