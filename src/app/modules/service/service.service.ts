@@ -103,8 +103,24 @@ const getSingle = async (id: string): Promise<Service | null> => {
   return result;
 };
 
+const update = async (
+  id: string,
+  payload: Partial<Service>
+): Promise<Service> => {
+  const result = await prisma.service.update({
+    where: { id },
+    data: payload,
+    include: {
+      category: true,
+    },
+  });
+
+  return result;
+};
+
 export const ServiceService = {
   create,
   getAll,
   getSingle,
+  update,
 };
