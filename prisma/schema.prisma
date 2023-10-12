@@ -54,7 +54,7 @@ model Service {
   name         String
   description  String
   price        Float
-  availability Boolean @default(true)
+  availability Boolean @default(false)
 
   categoryId String
   category   Category @relation(fields: [categoryId], references: [id])
