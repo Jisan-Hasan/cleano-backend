@@ -20,4 +20,6 @@ router.patch(
   ReviewController.update
 );
 
+router.delete('/:id', ReviewController.deleteReview);
+
 export const ReviewRoutes = router;

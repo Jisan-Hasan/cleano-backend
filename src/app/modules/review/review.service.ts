@@ -123,9 +123,20 @@ const update = async (
   return result;
 };
 
+const deleteReview = async (id: string): Promise<Review> => {
+  const result = await prisma.review.delete({
+    where: {
+      id,
+    },
+  });
+
+  return result;
+};
+
 export const ReviewService = {
   create,
   getAll,
   getSingle,
   update,
+  deleteReview,
 };
