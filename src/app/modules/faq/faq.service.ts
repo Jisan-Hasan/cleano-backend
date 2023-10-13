@@ -72,8 +72,15 @@ const getSingle = async (id: string): Promise<FAQ> => {
   return result;
 };
 
+const update = async (id: string, payload: Partial<FAQ>): Promise<FAQ> => {
+  const result = await prisma.fAQ.update({ where: { id }, data: payload });
+
+  return result;
+};
+
 export const FAQService = {
   create,
   getAll,
   getSingle,
+  update,
 };
