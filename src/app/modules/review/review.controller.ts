@@ -34,7 +34,31 @@ const getAll = catchAsync(async (req: Request, res: Response) => {
   });
 });
 
+const getSingle = catchAsync(async (req: Request, res: Response) => {
+  const result = await ReviewService.getSingle(req.params.id);
+
+  sendResponse<Review>(res, {
+    statusCode: httpStatus.OK,
+    success: true,
+    message: 'Review fetched successfully',
+    data: result,
+  });
+});
+
+const update = catchAsync(async (req: Request, res: Response) => {
+  const result = await ReviewService.update(req.params.id, req.body);
+
+  sendResponse<Review>(res, {
+    statusCode: httpStatus.OK,
+    success: true,
+    message: 'Review updated successfully',
+    data: result,
+  });
+});
+
 export const ReviewController = {
   create,
   getAll,
+  getSingle,
+  update,
 };

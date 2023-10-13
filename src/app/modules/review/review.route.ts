@@ -12,5 +12,12 @@ router.post(
 );
 
 router.get('/', ReviewController.getAll);
+router.get('/:id', ReviewController.getSingle);
+
+router.patch(
+  '/:id',
+  validateRequest(ReviewValidation.update),
+  ReviewController.update
+);
 
 export const ReviewRoutes = router;
