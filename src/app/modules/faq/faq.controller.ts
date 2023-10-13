@@ -34,7 +34,19 @@ const getAll = catchAsync(async (req: Request, res: Response) => {
   });
 });
 
+const getSingle = catchAsync(async (req: Request, res: Response) => {
+  const result = await FAQService.getSingle(req.params.id);
+
+  sendResponse<FAQ>(res, {
+    statusCode: httpStatus.OK,
+    success: true,
+    message: 'FAQ fetched successfully',
+    data: result,
+  });
+});
+
 export const FAQController = {
   create,
   getAll,
+  getSingle,
 };

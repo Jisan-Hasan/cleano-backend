@@ -8,5 +8,6 @@ const router = express.Router();
 router.post('/', validateRequest(FAQValidation.create), FAQController.create);
 
 router.get('/', FAQController.getAll);
+router.get('/:id', FAQController.getSingle);
 
 export const FAQRoutes = router;

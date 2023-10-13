@@ -1,5 +1,7 @@
 /* eslint-disable @typescript-eslint/no-explicit-any */
 import { FAQ, Prisma } from '@prisma/client';
+import httpStatus from 'http-status';
+import ApiError from '../../../errors/ApiError';
 import { paginationHelpers } from '../../../helpers/paginationHelper';
 import { IGenericResponse } from '../../../interfaces/common';
 import { IPaginationOptions } from '../../../interfaces/pagination';
@@ -60,7 +62,18 @@ const getAll = async (
   return { meta: { total, page, limit }, data: result };
 };
 
+const getSingle = async (id: string): Promise<FAQ> => {
+  const result = await prisma.fAQ.findUnique({ where: { id } });
+
+  if (!result) {
+    throw new ApiError(httpStatus.NOT_FOUND, 'FAQ not found');
+  }
+
+  return result;
+};
+
 export const FAQService = {
   create,
   getAll,
+  getSingle,
 };
