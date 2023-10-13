@@ -1,3 +1,4 @@
+/* eslint-disable @typescript-eslint/no-explicit-any */
 import { Category, Prisma } from '@prisma/client';
 import httpStatus from 'http-status';
 import ApiError from '../../../errors/ApiError';
@@ -23,9 +24,6 @@ const getAll = async (
 
   const { searchTerm, ...filterData } = filters;
 
-  //   console.log(page, limit, skip, sortBy, sortOrder);
-  //   console.log(searchTerm, filterData);
-
   const andConditions = [];
 
   if (searchTerm) {
@@ -44,7 +42,6 @@ const getAll = async (
       AND: Object.keys(filterData).map(key => {
         return {
           [key]: {
-            // eslint-disable-next-line @typescript-eslint/no-explicit-any
             equals: (filterData as any)[key],
           },
         };

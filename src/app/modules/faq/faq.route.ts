@@ -7,4 +7,6 @@ const router = express.Router();
 
 router.post('/', validateRequest(FAQValidation.create), FAQController.create);
 
+router.get('/', FAQController.getAll);
+
 export const FAQRoutes = router;
