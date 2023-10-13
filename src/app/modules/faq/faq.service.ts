@@ -78,9 +78,16 @@ const update = async (id: string, payload: Partial<FAQ>): Promise<FAQ> => {
   return result;
 };
 
+const deleteFaq = async (id: string): Promise<FAQ> => {
+  const result = await prisma.fAQ.delete({ where: { id } });
+
+  return result;
+};
+
 export const FAQService = {
   create,
   getAll,
   getSingle,
   update,
+  deleteFaq,
 };

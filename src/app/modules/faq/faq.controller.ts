@@ -56,9 +56,21 @@ const update = catchAsync(async (req: Request, res: Response) => {
   });
 });
 
+const deleteFaq = catchAsync(async (req: Request, res: Response) => {
+  const result = await FAQService.deleteFaq(req.params.id);
+
+  sendResponse<FAQ>(res, {
+    statusCode: httpStatus.OK,
+    success: true,
+    message: 'FAQ deleted successfully',
+    data: result,
+  });
+});
+
 export const FAQController = {
   create,
   getAll,
   getSingle,
   update,
+  deleteFaq,
 };

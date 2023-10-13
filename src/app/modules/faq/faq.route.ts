@@ -16,4 +16,6 @@ router.patch(
   FAQController.update
 );
 
+router.delete('/:id', FAQController.deleteFaq);
+
 export const FAQRoutes = router;
