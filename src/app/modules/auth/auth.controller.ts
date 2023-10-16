@@ -16,8 +16,7 @@ const signup = catchAsync(async (req: Request, res: Response) => {
   });
 });
 
-const createAdmin = catchAsync(async (req: Request, res: Response) => {
-  req.body.role = 'admin';
+const createUser = catchAsync(async (req: Request, res: Response) => {
   await AuthService.signup(req.body);
 
   sendResponse(res, {
@@ -68,7 +67,7 @@ const changePassword = catchAsync(async (req: Request, res: Response) => {
 
 export const AuthController = {
   signup,
-  createAdmin,
+  createUser,
   login,
   changePassword,
 };

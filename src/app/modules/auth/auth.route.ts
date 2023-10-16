@@ -14,9 +14,9 @@ router.post(
 );
 
 router.post(
-  '/create-admin',
-  validateRequest(AuthValidation.signup),
-  AuthController.createAdmin
+  '/create-user',
+  validateRequest(AuthValidation.create),
+  AuthController.createUser
 );
 
 router.post(

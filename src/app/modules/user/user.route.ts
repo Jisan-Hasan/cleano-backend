@@ -11,4 +11,7 @@ router.patch(
   UserController.updateProfile
 );
 
+router.get('/', UserController.getAll);
+router.get('/:email', UserController.getSingle);
+
 export const UserRoutes = router;
