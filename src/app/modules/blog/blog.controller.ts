@@ -45,8 +45,20 @@ const getSingle = catchAsync(async (req: Request, res: Response) => {
   });
 });
 
+const update = catchAsync(async (req: Request, res: Response) => {
+  const result = await BlogService.update(req.params.id, req.body);
+
+  sendResponse<Blog>(res, {
+    statusCode: httpStatus.OK,
+    success: true,
+    message: 'Blog updated successfully',
+    data: result,
+  });
+});
+
 export const BlogController = {
   create,
   getAll,
   getSingle,
+  update,
 };

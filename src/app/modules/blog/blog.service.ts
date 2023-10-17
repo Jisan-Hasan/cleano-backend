@@ -79,8 +79,18 @@ const getSingle = async (id: string): Promise<Blog> => {
   return result;
 };
 
+const update = async (id: string, payload: Partial<Blog>): Promise<Blog> => {
+  const result = await prisma.blog.update({
+    where: { id },
+    data: payload,
+  });
+
+  return result;
+};
+
 export const BlogService = {
   create,
   getAll,
   getSingle,
+  update,
 };

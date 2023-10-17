@@ -10,4 +10,10 @@ router.post('/', validateRequest(BlogValidation.create), BlogController.create);
 router.get('/', BlogController.getAll);
 router.get('/:id', BlogController.getSingle);
 
+router.patch(
+  '/:id',
+  validateRequest(BlogValidation.update),
+  BlogController.update
+);
+
 export const BlogRoutes = router;
