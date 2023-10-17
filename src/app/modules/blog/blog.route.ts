@@ -7,4 +7,6 @@ const router = express.Router();
 
 router.post('/', validateRequest(BlogValidation.create), BlogController.create);
 
+router.get('/', BlogController.getAll);
+
 export const BlogRoutes = router;
