@@ -34,7 +34,19 @@ const getAll = catchAsync(async (req: Request, res: Response) => {
   });
 });
 
+const getSingle = catchAsync(async (req: Request, res: Response) => {
+  const result = await BlogService.getSingle(req.params.id);
+
+  sendResponse<Blog>(res, {
+    statusCode: httpStatus.OK,
+    success: true,
+    message: 'Blog fetched successfully',
+    data: result,
+  });
+});
+
 export const BlogController = {
   create,
   getAll,
+  getSingle,
 };

@@ -8,5 +8,6 @@ const router = express.Router();
 router.post('/', validateRequest(BlogValidation.create), BlogController.create);
 
 router.get('/', BlogController.getAll);
+router.get('/:id', BlogController.getSingle);
 
 export const BlogRoutes = router;
