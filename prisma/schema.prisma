@@ -125,3 +125,15 @@ model FAQ {
 
   @@map("faqs")
 }
+
+model Blog {
+  id          String  @id @default(uuid())
+  title       String
+  description String
+  image       String?
+
+  createdAt DateTime @default(now())
+  updatedAt DateTime @updatedAt
+
+  @@map("blogs")
+}
