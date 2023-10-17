@@ -6,12 +6,14 @@ import { UserValidation } from './user.validation';
 const router = express.Router();
 
 router.patch(
-  '/update/:email',
+  '/:email',
   validateRequest(UserValidation.updateProfile),
   UserController.updateProfile
 );
 
 router.get('/', UserController.getAll);
 router.get('/:email', UserController.getSingle);
+
+router.delete('/:email', UserController.deleteUser);
 
 export const UserRoutes = router;

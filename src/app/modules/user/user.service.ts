@@ -81,8 +81,19 @@ const getSingle = async (email: string) => {
   return result;
 };
 
+const deleteUser = async (email: string) => {
+  const result = await prisma.user.delete({
+    where: {
+      email,
+    },
+  });
+
+  return result;
+};
+
 export const UserService = {
   updateProfile,
   getAll,
   getSingle,
+  deleteUser,
 };
