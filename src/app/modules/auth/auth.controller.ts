@@ -30,12 +30,12 @@ const login = catchAsync(async (req: Request, res: Response) => {
   const result = await AuthService.login(req.body);
 
   // set refresh token into cookie
-  const cookieOptions = {
-    secure: config.env === 'production',
-    httpOnly: true,
-  };
+  // const cookieOptions = {
+  //   secure: config.env === 'production',
+  //   httpOnly: true,
+  // };
 
-  res.cookie('refreshToken', result.refreshToken, cookieOptions);
+  // res.cookie('refreshToken', result.refreshToken, cookieOptions);
 
   sendResponse(res, {
     statusCode: httpStatus.OK,
