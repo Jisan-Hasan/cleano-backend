@@ -1,5 +1,5 @@
-"use strict";
-Object.defineProperty(exports, "__esModule", { value: true });
+'use strict';
+Object.defineProperty(exports, '__esModule', { value: true });
 exports.userSearchableFields = exports.userFilterableFields = void 0;
 exports.userFilterableFields = ['searchTerm'];
 exports.userSearchableFields = ['email', 'firstName'];

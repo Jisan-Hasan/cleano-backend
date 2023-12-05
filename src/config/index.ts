@@ -16,3 +16,5 @@ export default {
     refresh_expires_in: process.env.JWT_REFRESH_EXPIRES_IN,
   },
 };
+
+// DATABASE_URL="postgresql://postgres:bEcA3fCcfD*5c4FE13D6425CacAb-5ed@roundhouse.proxy.rlwy.net:44879/railway"
