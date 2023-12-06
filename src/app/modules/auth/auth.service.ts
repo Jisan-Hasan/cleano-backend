@@ -6,6 +6,7 @@ import ApiError from '../../../errors/ApiError';
 import { jwtHelpers } from '../../../helpers/jwtHelpers';
 import { comparePassword, hashPassword } from '../../../shared/bcrypt';
 import prisma from '../../../shared/prisma';
+import { sendEmail } from '../../../utils/sendMail';
 import { IChangePasswordPayload, ILoginPayload } from './auth.interface';
 
 const signup = async (payload: User) => {
@@ -15,19 +16,61 @@ const signup = async (payload: User) => {
       email: payload.email,
     },
   });
-
   //   throw error if email already exists
   if (existingUser) {
     throw new ApiError(httpStatus.CONFLICT, 'Email already exists');
   }
   // hash user password
   payload.password = await hashPassword(payload.password);
-  //   save to database
-  const result = await prisma.user.create({
-    data: payload,
-  });
 
-  return result;
+  // prepare token for email verification
+  const verificationToken = jwtHelpers.createToken(
+    { email: payload.email, password: payload.password, name: payload.name },
+    config.email_verification_secret as Secret,
+    config.email_verify_expires_in as string
+  );
+
+  // prepare verification link
+  const verificationLink = `<p>Please verify you email.</p><a href="${config.client_url}/verify-email?token=${verificationToken}">Verify</a>`;
+  // send email verification link
+  sendEmail(payload.email, 'Verify your email', verificationLink);
+
+  return 'An verification link has been sent to your email. Please verify your email to login';
+};
+
+const verifyEmail = async (token: string) => {
+  const decodedToken = jwtHelpers.verifyToken(
+    token,
+    config.email_verification_secret as Secret
+  );
+
+  const { email, password, name } = decodedToken;
+
+  // find user with the email
+  const isUserExists = await prisma.user.findUnique({ where: { email } });
+
+  if (isUserExists) {
+    throw new ApiError(httpStatus.CONFLICT, 'User already verified');
+  }
+
+  // prepare user data
+  const userData = {
+    email,
+    password,
+    name,
+  };
+
+  // save user
+  const result = await prisma.user.create({ data: userData });
+
+  if (!result) {
+    throw new ApiError(
+      httpStatus.INTERNAL_SERVER_ERROR,
+      "Can't verify email and Signup Unsuccessful. Try again Later"
+    );
+  }
+
+  return 'Email Verification Successful';
 };
 
 const login = async (payload: ILoginPayload) => {
@@ -139,4 +182,5 @@ export const AuthService = {
   signup,
   login,
   changePassword,
+  verifyEmail,
 };

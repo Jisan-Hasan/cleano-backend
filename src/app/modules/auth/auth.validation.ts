@@ -3,30 +3,14 @@ import { z } from 'zod';
 const signup = z.object({
   body: z
     .object({
-      firstName: z.string({ required_error: 'First name is required' }),
-      lastName: z.string().optional(),
+      name: z.string({ required_error: 'Name is required' }),
       email: z
         .string({ required_error: 'Please enter a valid email address' })
         .email(),
       password: z
         .string({ required_error: 'Password is required' })
-        .min(6, 'Password must be at least 6 characters long'),
-    })
-    .strict(),
-});
-
-const create = z.object({
-  body: z
-    .object({
-      firstName: z.string({ required_error: 'First name is required' }),
-      lastName: z.string().optional(),
-      role: z.enum(['admin', 'user']),
-      email: z
-        .string({ required_error: 'Please enter a valid email address' })
-        .email(),
-      password: z
-        .string({ required_error: 'Password is required' })
-        .min(6, 'Password must be at least 6 characters long'),
+        .min(6, 'Password must be at least 6 characters long')
+        .max(20, 'Password must be at most 20 characters long'),
     })
     .strict(),
 });
@@ -57,5 +41,4 @@ export const AuthValidation = {
   signup,
   login,
   changePassword,
-  create,
 };

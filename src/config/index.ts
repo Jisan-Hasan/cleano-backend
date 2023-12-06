@@ -15,4 +15,11 @@ export default {
     expires_in: process.env.JWT_EXPIRES_IN,
     refresh_expires_in: process.env.JWT_REFRESH_EXPIRES_IN,
   },
+  client_url: process.env.CLIENT_URL,
+  email_verify_expires_in: process.env.EMAIL_VERIFY_TOKEN_EXPIRES_IN,
+  email_verification_secret: process.env.EMAIL_VERIFICATION_SECRET,
+  mail: {
+    email: process.env.EMAIL,
+    password: process.env.EMAIL_PASSWORD,
+  },
 };

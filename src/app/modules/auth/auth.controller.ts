@@ -7,22 +7,23 @@ import sendResponse from '../../../shared/sendResponse';
 import { AuthService } from './auth.service';
 
 const signup = catchAsync(async (req: Request, res: Response) => {
-  await AuthService.signup(req.body);
+  const result = await AuthService.signup(req.body);
 
   sendResponse(res, {
     statusCode: 201,
     success: true,
-    message: 'Signup successful',
+    message: result,
   });
 });
 
-const createUser = catchAsync(async (req: Request, res: Response) => {
-  await AuthService.signup(req.body);
+const verifyEmail = catchAsync(async (req: Request, res: Response) => {
+  const { token } = req.params;
+  const result = await AuthService.verifyEmail(token);
 
   sendResponse(res, {
-    statusCode: 201,
+    statusCode: httpStatus.OK,
     success: true,
-    message: 'Admin created successfully',
+    message: result,
   });
 });
 
@@ -67,7 +68,7 @@ const changePassword = catchAsync(async (req: Request, res: Response) => {
 
 export const AuthController = {
   signup,
-  createUser,
   login,
   changePassword,
+  verifyEmail,
 };

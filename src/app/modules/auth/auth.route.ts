@@ -13,12 +13,7 @@ router.post(
   AuthController.signup
 );
 
-router.post(
-  '/create-user',
-  auth(ENUM_USER_ROLE.ADMIN, ENUM_USER_ROLE.SUPER_ADMIN),
-  validateRequest(AuthValidation.create),
-  AuthController.createUser
-);
+router.get('/verify-email/:token', AuthController.verifyEmail);
 
 router.post(
   '/login',
