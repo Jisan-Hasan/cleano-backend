@@ -3,11 +3,11 @@ import { z } from 'zod';
 const create = z.object({
   body: z
     .object({
-      name: z.string(),
-      description: z.string(),
+      image: z.string().startsWith("data:image"),
+      title: z.string(),
+      description: z.string().optional(),
       price: z.number().positive(),
-      availability: z.boolean().optional(),
-      categoryId: z.string().uuid(),
+      isAvailable: z.boolean().optional(),
     })
     .strict(),
 });

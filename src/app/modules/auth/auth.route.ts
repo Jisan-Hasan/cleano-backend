@@ -1,5 +1,5 @@
+import { Role } from '@prisma/client';
 import express from 'express';
-import { ENUM_USER_ROLE } from '../../../enums/user';
 import auth from '../../middlewares/auth';
 import validateRequest from '../../middlewares/validateRequest';
 import { AuthController } from './auth.controller';
@@ -23,7 +23,7 @@ router.post(
 
 router.post(
   '/change-password',
-  auth(ENUM_USER_ROLE.ADMIN, ENUM_USER_ROLE.USER, ENUM_USER_ROLE.SUPER_ADMIN),
+  auth(Role.admin, Role.super_admin, Role.user),
   validateRequest(AuthValidation.changePassword),
   AuthController.changePassword
 );

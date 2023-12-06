@@ -11,11 +11,11 @@ datasource db {
 }
 
 model User {
-  id         String  @id @default(uuid())
-  email      String  @unique
-  password   String
-  role       Role    @default(user)
-  name       String
+  id       String @id @default(uuid())
+  email    String @unique
+  password String
+  role     Role   @default(user)
+  name     String
 
   createdAt DateTime @default(now())
   updatedAt DateTime @updatedAt
@@ -29,35 +29,19 @@ enum Role {
   user
 }
 
-// model Category {
-//   id        String   @id @default(uuid())
-//   title     String
-//   createdAt DateTime @default(now())
-//   updatedAt DateTime @updatedAt
+model Service {
+  id          String  @id @default(uuid())
+  image       String
+  title       String
+  description String?
+  price       Float
+  isAvailable Boolean @default(false)
 
-//   services Service[]
+  createdAt DateTime @default(now())
+  updatedAt DateTime @updatedAt
 
-//   @@map("categories")
-// }
-
-// model Service {
-//   id           String  @id @default(uuid())
-//   name         String
-//   description  String
-//   price        Float
-//   availability Boolean @default(false)
-
-//   categoryId String
-//   category   Category @relation(fields: [categoryId], references: [id])
-
-//   createdAt DateTime @default(now())
-//   updatedAt DateTime @updatedAt
-
-//   bookings Booking[]
-//   reviews  Review[]
-
-//   @@map("services")
-// }
+  @@map("services")
+}
 
 // model Booking {
 //   id         String        @id @default(uuid())
