@@ -22,4 +22,7 @@ export default {
     email: process.env.EMAIL,
     password: process.env.EMAIL_PASSWORD,
   },
+  forgot_password_secret: process.env.FORGOT_PASSWORD_SECRET,
+  forgot_password_secret_expires_in:
+    process.env.FORGOT_PASSWORD_SECRET_EXPIRES_IN,
 };

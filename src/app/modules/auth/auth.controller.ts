@@ -66,9 +66,34 @@ const changePassword = catchAsync(async (req: Request, res: Response) => {
   });
 });
 
+const forgotPassword = catchAsync(async (req: Request, res: Response) => {
+  const { email } = req.body;
+  const result = await AuthService.forgotPassword(email);
+
+  sendResponse(res, {
+    statusCode: httpStatus.OK,
+    success: true,
+    message: result,
+  });
+});
+
+const resetPassword = catchAsync(async (req: Request, res: Response) => {
+  const { token } = req.params;
+  const { password } = req.body;
+  const result = await AuthService.resetPassword(token, password);
+
+  sendResponse(res, {
+    statusCode: httpStatus.OK,
+    success: true,
+    message: result,
+  });
+});
+
 export const AuthController = {
   signup,
   login,
   changePassword,
   verifyEmail,
+  forgotPassword,
+  resetPassword,
 };

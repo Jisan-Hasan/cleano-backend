@@ -178,9 +178,79 @@ const changePassword = async (
   return;
 };
 
+const forgotPassword = async (email: string) => {
+  // check if user exists with the email
+  const isUserExists = await prisma.user.findUnique({
+    where: {
+      email,
+    },
+  });
+  //   throw error if email already exists
+  if (!isUserExists) {
+    throw new ApiError(
+      httpStatus.NOT_FOUND,
+      'User does not exist with this email'
+    );
+  }
+
+  // prepare token for email verification
+  const resetToken = jwtHelpers.createToken(
+    { email: email },
+    config.forgot_password_secret as Secret,
+    config.forgot_password_secret_expires_in as string
+  );
+
+  // prepare reset-password link
+  const resetPasswordLink = `<p>Reset your account password.</p><a href="${config.client_url}/reset-password?token=${resetToken}">Reset Password</a>`;
+  // send email reset-password link
+  sendEmail(email, 'Reset Cleano Account Password', resetPasswordLink);
+
+  return 'An reset-password link has been sent to your email.';
+};
+
+const resetPassword = async (token: string, newPassword: string) => {
+  // decode jwt token
+  const decodedToken = jwtHelpers.verifyToken(
+    token,
+    config.forgot_password_secret as Secret
+  );
+
+  const { email } = decodedToken;
+
+  // find user with the email
+  const isUserExists = await prisma.user.findUnique({ where: { email } });
+  if (!isUserExists) {
+    throw new ApiError(httpStatus.NOT_FOUND, 'No User Found with this Email');
+  }
+
+  // hash-password
+  const hashedPassword = await hashPassword(newPassword);
+
+  // update user password
+  const result = await prisma.user.update({
+    where: {
+      email,
+    },
+    data: {
+      password: hashedPassword,
+    },
+  });
+
+  if (!result) {
+    throw new ApiError(
+      httpStatus.INTERNAL_SERVER_ERROR,
+      "Can't update password. Please try again."
+    );
+  }
+
+  return 'Password reset successfully';
+};
+
 export const AuthService = {
   signup,
   login,
   changePassword,
   verifyEmail,
+  forgotPassword,
+  resetPassword,
 };
