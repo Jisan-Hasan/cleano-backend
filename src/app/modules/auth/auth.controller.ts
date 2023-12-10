@@ -89,6 +89,17 @@ const resetPassword = catchAsync(async (req: Request, res: Response) => {
   });
 });
 
+const verifyToken = catchAsync(async (req: Request, res: Response) => {
+  const { token } = req.params;
+  const result = await AuthService.verifyToken(token);
+
+  sendResponse(res, {
+    statusCode: httpStatus.OK,
+    success: true,
+    message: result,
+  });
+});
+
 export const AuthController = {
   signup,
   login,
@@ -96,4 +107,5 @@ export const AuthController = {
   verifyEmail,
   forgotPassword,
   resetPassword,
+  verifyToken,
 };

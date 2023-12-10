@@ -40,4 +40,6 @@ router.post(
   AuthController.resetPassword
 );
 
+router.get('/verify-token/:token', AuthController.verifyToken);
+
 export const AuthRoutes = router;

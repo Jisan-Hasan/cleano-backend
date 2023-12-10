@@ -246,6 +246,22 @@ const resetPassword = async (token: string, newPassword: string) => {
   return 'Password reset successfully';
 };
 
+const verifyToken = async (token: string) => {
+  if (!token) {
+    throw new ApiError(httpStatus.UNAUTHORIZED, 'Token is required');
+  }
+  const result = await jwtHelpers.verifyToken(
+    token,
+    config.jwt.secret as Secret
+  );
+
+  if (!result) {
+    throw new ApiError(httpStatus.UNAUTHORIZED, 'Invalid token');
+  }
+
+  return 'Authorized User Token';
+};
+
 export const AuthService = {
   signup,
   login,
@@ -253,4 +269,5 @@ export const AuthService = {
   verifyEmail,
   forgotPassword,
   resetPassword,
+  verifyToken,
 };
