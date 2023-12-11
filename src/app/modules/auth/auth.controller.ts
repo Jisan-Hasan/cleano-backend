@@ -1,7 +1,5 @@
 import { Request, Response } from 'express';
 import httpStatus from 'http-status';
-import config from '../../../config';
-import { jwtHelpers } from '../../../helpers/jwtHelpers';
 import catchAsync from '../../../shared/catchAsync';
 import sendResponse from '../../../shared/sendResponse';
 import { AuthService } from './auth.service';
@@ -51,13 +49,7 @@ const login = catchAsync(async (req: Request, res: Response) => {
 });
 
 const changePassword = catchAsync(async (req: Request, res: Response) => {
-  // get email from access token
-  const { email } = jwtHelpers.verifyToken(
-    req.headers.authorization as string,
-    config.jwt.secret as string
-  );
-
-  await AuthService.changePassword(email, req.body);
+  await AuthService.changePassword(req?.user?.email, req.body);
 
   sendResponse(res, {
     statusCode: httpStatus.OK,
