@@ -18,4 +18,11 @@ router.get('/:id', ServiceController.getById);
 
 router.get('/', ServiceController.getAll);
 
+router.patch(
+  '/:id',
+  auth(Role.admin),
+  validateRequest(ServiceValidation.update),
+  ServiceController.updateById
+);
+
 export const ServiceRoutes = router;

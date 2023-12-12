@@ -15,11 +15,11 @@ const create = z.object({
 const update = z.object({
   body: z
     .object({
-      name: z.string().optional(),
+      image: z.string().startsWith('data:image').optional(),
+      title: z.string().optional(),
       description: z.string().optional(),
       price: z.number().positive().optional(),
-      availability: z.boolean().optional(),
-      categoryId: z.string().uuid().optional(),
+      isAvailable: z.boolean().optional().optional(),
     })
     .strict(),
 });
