@@ -119,9 +119,24 @@ const updateById = async (
   return result;
 };
 
+// delete service by id service
+const deleteById = async (id: string): Promise<Partial<Service>> => {
+  const result = await prisma.service.delete({
+    where: {
+      id,
+    },
+    select: {
+      id: true,
+    },
+  });
+
+  return result;
+};
+
 export const ServiceService = {
   create,
   getAll,
   getById,
   updateById,
+  deleteById,
 };

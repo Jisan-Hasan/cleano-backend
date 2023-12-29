@@ -25,4 +25,6 @@ router.patch(
   ServiceController.updateById
 );
 
+router.delete('/:id', auth(Role.admin), ServiceController.deleteById);
+
 export const ServiceRoutes = router;
