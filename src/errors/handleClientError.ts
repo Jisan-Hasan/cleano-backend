@@ -1,11 +1,13 @@
 import { Prisma } from '@prisma/client';
 import { IGenericErrorMessage } from '../interfaces/error';
+import httpStatus from 'http-status';
 
 const handleClientError = (error: Prisma.PrismaClientKnownRequestError) => {
   let errors: IGenericErrorMessage[] = [];
   let message = '';
-  const statusCode = 400;
+  let statusCode = 400;
 
+  // console.log(error.code);
   if (error.code === 'P2025') {
     message = (error.meta?.cause as string) || 'Record not found!';
     errors = [
@@ -17,6 +19,33 @@ const handleClientError = (error: Prisma.PrismaClientKnownRequestError) => {
   } else if (error.code === 'P2003') {
     if (error.message.includes('delete()` invocation:')) {
       message = 'Delete failed';
+      errors = [
+        {
+          path: '',
+          message,
+        },
+      ];
+    } else if (error.message.includes('update()')) {
+      message = 'Update failed';
+      errors = [
+        {
+          path: '',
+          message,
+        },
+      ];
+    } else if (error.message.includes('create()')) {
+      message = 'Create failed. Check your data';
+      errors = [
+        {
+          path: '',
+          message,
+        },
+      ];
+    }
+  } else if (error.code === 'P2002') {
+    if (error.message.includes('Unique constraint failed')) {
+      statusCode = httpStatus.CONFLICT;
+      message = 'Same data already exists';
       errors = [
         {
           path: '',

@@ -9,7 +9,7 @@ const router = express.Router();
 
 router.post(
   '/',
-  // auth(Role.admin),
+  auth(Role.admin),
   validateRequest(ServiceValidation.create),
   ServiceController.create
 );

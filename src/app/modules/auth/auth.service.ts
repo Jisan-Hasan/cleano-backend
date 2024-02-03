@@ -100,7 +100,7 @@ const login = async (payload: ILoginPayload) => {
 
   //  generate access token
   const accessToken = jwtHelpers.createToken(
-    { email: user.email, role: user.role },
+    { email: user.email, role: user.role, userId: user.id },
     config.jwt.secret as Secret,
     config.jwt.expires_in as string
   );
