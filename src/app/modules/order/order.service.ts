@@ -2,6 +2,8 @@
 
 import httpStatus from 'http-status';
 import ApiError from '../../../errors/ApiError';
+import { paginationHelpers } from '../../../helpers/paginationHelper';
+import { IPaginationOptions } from '../../../interfaces/pagination';
 import prisma from '../../../shared/prisma';
 import { getNewOrderNumber, getOrderServices } from './order.utils';
 
@@ -70,6 +72,58 @@ const placeOrder = async (
   return result;
 };
 
+//** Get All Orders From a user */
+const getUserOrders = async (
+  userId: string,
+  paginationOptions: IPaginationOptions
+) => {
+  // destructure page and limit from pagination options
+  const { page, limit, skip } =
+    paginationHelpers.calculatePagination(paginationOptions);
+
+  const orders = await prisma.order.findMany({
+    where: {
+      user_id: userId,
+    },
+    select: {
+      id: true,
+      orderNumber: true,
+      createdAt: true,
+      total: true,
+      payment: {
+        select: {
+          method: true,
+          is_paid: true,
+        },
+      },
+      status: true,
+    },
+    orderBy: {
+      createdAt: 'desc',
+    },
+    skip,
+    take: limit,
+  });
+
+  // get total count of orders
+  const total = await prisma.order.count({
+    where: {
+      user_id: userId,
+    },
+  });
+
+  return {
+    meta: {
+      page,
+      limit,
+      total,
+    },
+    data: orders,
+  };
+};
+
+//** Export Order Service */
 export const OrderService = {
   placeOrder,
+  getUserOrders,
 };

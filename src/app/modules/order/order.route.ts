@@ -15,4 +15,11 @@ router.post(
   OrderController.placeOrder
 );
 
+//** Get All Orders From a user */
+router.get(
+  '/get-orders/user',
+  auth(Role.user, Role.admin, Role.super_admin),
+  OrderController.getUserOrders
+);
+
 export const OrderRoutes = router;
