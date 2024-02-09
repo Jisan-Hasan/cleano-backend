@@ -22,4 +22,11 @@ router.get(
   OrderController.getUserOrders
 );
 
+//** Get Specific Order Details Route */
+router.get(
+  '/get-order/:orderId',
+  auth(Role.user, Role.admin, Role.super_admin),
+  OrderController.getOrderDetailsById
+);
+
 export const OrderRoutes = router;

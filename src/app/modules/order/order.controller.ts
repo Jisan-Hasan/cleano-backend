@@ -49,8 +49,23 @@ const getUserOrders = catchAsync(async (req: Request, res: Response) => {
   });
 });
 
+//** Get Specific Order Details */
+const getOrderDetailsById = catchAsync(async (req: Request, res: Response) => {
+  const { orderId } = req.params;
+
+  const result = await OrderService.getOrderDetailsById(orderId);
+
+  sendResponse(res, {
+    statusCode: httpStatus.OK,
+    success: true,
+    message: 'Order details fetched successfully',
+    data: result,
+  });
+});
+
 //** Export Order Controllers */
 export const OrderController = {
   placeOrder,
   getUserOrders,
+  getOrderDetailsById,
 };
