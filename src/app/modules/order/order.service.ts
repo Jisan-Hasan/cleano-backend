@@ -122,8 +122,50 @@ const getUserOrders = async (
   };
 };
 
+//** Get Specific Order Details Service */
+const getOrderDetailsById = async (orderId: string) => {
+  const order = await prisma.order.findUnique({
+    where: {
+      id: orderId,
+    },
+    select: {
+      id: true,
+      orderNumber: true,
+      createdAt: true,
+      total: true,
+      status: true,
+
+      payment: {
+        select: {
+          method: true,
+          is_paid: true,
+        },
+      },
+      orderItems: {
+        select: {
+          name: true,
+          price: true,
+          quantity: true,
+          service: {
+            select: {
+              image: true,
+            },
+          },
+        },
+      },
+    },
+  });
+
+  if (!order) {
+    throw new ApiError(httpStatus.NOT_FOUND, 'Order not found');
+  }
+
+  return order;
+};
+
 //** Export Order Service */
 export const OrderService = {
   placeOrder,
   getUserOrders,
+  getOrderDetailsById,
 };
